@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java学习之路 - 记录学习历程，分享技术心得</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Highlight.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 自定义CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .nav-bar {
+            z-index: 100;
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 粒子背景容器 -->
+    <div id="particles-js"></div>
+    
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- 导航栏 -->
+    <nav class="nav-bar fixed w-full py-4 px-4 md:px-8 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-mug-hot text-2xl mr-2 text-gold"></i>
+                <h1 class="text-xl font-bold">Java学习之路</h1>
+            </div>
+            
+            <!-- 桌面端菜单 -->
+            <div class="desktop-menu flex items-center space-x-6">
+                <a href="index.html" class="font-medium hover:text-tech-blue">首页</a>
+                <a href="learning-path.html" class="font-medium hover:text-tech-blue">学习路线</a>
+                <a href="sanqi-assistant.html" class="font-medium hover:text-tech-blue">三七上仙</a>
+                <a href="#" class="font-medium hover:text-tech-blue">文章分类</a>
+                <a href="#" class="font-medium hover:text-tech-blue">关于我</a>
+                
+                <!-- 夜间模式切换 -->
+                <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <div class="mobile-menu">
+                <button id="menuToggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden mt-4 bg-white dark:bg-dark-card rounded-lg shadow-lg absolute w-full left-0 top-full p-4">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="font-medium py-2 hover:text-tech-blue">首页</a>
+                <a href="learning-path.html" class="font-medium py-2 hover:text-tech-blue">学习路线</a>
+                <a href="sanqi-assistant.html" class="font-medium py-2 hover:text-tech-blue">三七上仙</a>
+                <a href="#" class="font-medium py-2 hover:text-tech-blue">文章分类</a>
+                <a href="#" class="font-medium py-2 hover:text-tech-blue">关于我</a>
+                <div class="pt-2 border-t border-gray-200 dark:border-gray-700">
+                    <button id="mobileThemeToggle" class="w-full flex items-center justify-center py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                        <i class="fas fa-moon mr-2"></i> 夜间模式
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 首页横幅 -->
+    <section class="banner pt-20">
+        <div class="container mx-auto px-4 py-16 text-center banner-content">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Java学习之路</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">记录学习历程，分享技术心得</p>
+            <div class="flex justify-center gap-4">
+                <a href="#latest-articles" class="btn btn-primary">开始学习</a>
+                <a href="learning-path.html" class="btn btn-secondary">学习路线</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧主要内容 -->
+            <div class="lg:w-2/3">
+                <!-- 最新文章 -->
+                <section id="latest-articles" class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-tech-blue inline-block dark:border-dark-border">最新文章</h2>
+                    
+                    <!-- 文章卡片 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 文章1 -->
+                        <article class="card article-card overflow-hidden">
+                            <img src="https://picsum.photos/600/300?random=1" alt="文章封面" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> 2023-08-15</span>
+                                    <span><i class="far fa-comment mr-1"></i> 24 评论</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Java环境搭建与HelloWorld程序</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">详细介绍如何在Windows系统上搭建Java开发环境，并编写第一个经典的HelloWorld程序...</p>
+                                <a href="articles/article1.html" class="text-tech-blue font-medium hover:underline">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- 文章2 -->
+                        <article class="card article-card overflow-hidden">
+                            <img src="https://picsum.photos/600/300?random=2" alt="文章封面" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> 2023-08-10</span>
+                                    <span><i class="far fa-comment mr-1"></i> 18 评论</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">深入理解Java面向对象三大特性</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">封装、继承、多态是面向对象编程的核心概念，本文将通过实例详细解析这三大特性...</p>
+                                <a href="#" class="text-tech-blue font-medium hover:underline">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- 文章3 -->
+                        <article class="card article-card overflow-hidden">
+                            <img src="https://picsum.photos/600/300?random=3" alt="文章封面" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> 2023-08-05</span>
+                                    <span><i class="far fa-comment mr-1"></i> 32 评论</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Java集合框架详解：List、Set、Map</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">Java集合框架是Java编程中不可或缺的一部分，本文将详细介绍List、Set、Map接口及其实现类...</p>
+                                <a href="#" class="text-tech-blue font-medium hover:underline">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </article>
+                        
+                        <!-- 文章4 -->
+                        <article class="card article-card overflow-hidden">
+                            <img src="https://picsum.photos/600/300?random=4" alt="文章封面" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                                    <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> 2023-07-28</span>
+                                    <span><i class="far fa-comment mr-1"></i> 15 评论</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">Java异常处理机制详解</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">异常处理是Java程序健壮性的保障，本文将详细介绍try-catch-finally语句块及自定义异常...</p>
+                                <a href="#" class="text-tech-blue font-medium hover:underline">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+                
+                <!-- 文章归档 -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-tech-blue inline-block dark:border-dark-border">文章归档</h2>
+                    
+                    <div class="card p-6">
+                        <div class="space-y-4">
+                            <!-- 月份分类 -->
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">2023年8月</h3>
+                                <ul class="space-y-2 pl-4 border-l-2 border-tech-blue dark:border-dark-border">
+                                    <li class="flex justify-between">
+                                        <a href="#" class="hover:text-tech-blue dark:hover:text-tech-blue">Java环境搭建与HelloWorld程序</a>
+                                        <span class="text-gray-500 text-sm dark:text-gray-400">08-15</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <a href="#" class="hover:text-tech-blue dark:hover:text-tech-blue">深入理解Java面向对象三大特性</a>
+                                        <span class="text-gray-500 text-sm dark:text-gray-400">08-10</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">2023年7月</h3>
+                                <ul class="space-y-2 pl-4 border-l-2 border-gold dark:border-dark-border">
+                                    <li class="flex justify-between">
+                                        <a href="#" class="hover:text-tech-blue dark:hover:text-tech-blue">Spring Boot实战：构建CRUD应用</a>
+                                        <span class="text-gray-500 text-sm dark:text-gray-400">07-28</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <a href="#" class="hover:text-tech-blue dark:hover:text-tech-blue">微服务架构入门指南</a>
+                                        <span class="text-gray-500 text-sm dark:text-gray-400">07-15</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- 右侧侧边栏 -->
+            <div class="lg:w-1/3">
+                <aside class="card sidebar p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4">关于我</h3>
+                    <div class="text-center">
+                        <img src="https://picsum.photos/100/100" alt="作者头像" class="w-24 h-24 rounded-full mx-auto mb-4">
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">热爱技术的Java开发者，专注于分享Java学习经验和最佳实践。</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+                
+                <aside class="card sidebar p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4">热门标签</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag tag-primary">Java基础</span>
+                        <span class="tag tag-primary">面向对象</span>
+                        <span class="tag tag-primary">集合框架</span>
+                        <span class="tag tag-primary">异常处理</span>
+                        <span class="tag tag-primary">多线程</span>
+                        <span class="tag tag-primary">JVM</span>
+                        <span class="tag tag-primary">Spring</span>
+                        <span class="tag tag-primary">数据库</span>
+                    </div>
+                </aside>
+                
+                <aside class="card sidebar p-6">
+                    <h3 class="text-xl font-bold mb-4">文章归档</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-tech-blue dark:hover:text-tech-blue"><i class="fas fa-chevron-right text-xs mr-2"></i> 2023年8月 (4)</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-tech-blue dark:hover:text-tech-blue"><i class="fas fa-chevron-right text-xs mr-2"></i> 2023年7月 (6)</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-tech-blue dark:hover:text-tech-blue"><i class="fas fa-chevron-right text-xs mr-2"></i> 2023年6月 (8)</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-300 hover:text-tech-blue dark:hover:text-tech-blue"><i class="fas fa-chevron-right text-xs mr-2"></i> 2023年5月 (5)</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 关于我 -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 pb-2 border-b-2 border-tech-blue inline-block">关于我</h2>
+            
+            <div class="card p-8">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="个人照片" class="w-full rounded-lg">
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-2xl font-bold mb-4">景天的博客 - Java全栈开发者</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            我是一名热爱技术的Java开发者，拥有5年以上的Java开发经验。目前就职于某知名互联网公司，
+                            负责企业级应用的设计与开发工作。我热衷于分享技术知识，帮助更多的开发者成长。
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            我的技术栈主要包括：Java、Spring、Spring Boot、MyBatis、MySQL、Redis、RabbitMQ、
+                            Docker、Kubernetes等。目前正在深入学习微服务架构和云原生技术。
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="text-center p-3 bg-white dark:bg-dark-card rounded-lg shadow">
+                                <div class="text-2xl font-bold text-tech-blue">5+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">年开发经验</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-dark-card rounded-lg shadow">
+                                <div class="text-2xl font-bold text-gold">30+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">原创文章</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-dark-card rounded-lg shadow">
+                                <div class="text-2xl font-bold text-mint-green">10k+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">总阅读量</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-dark-card rounded-lg shadow">
+                                <div class="text-2xl font-bold text-light-purple">500+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">粉丝关注</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-tech-blue text-white rounded-full text-sm">Java</span>
+                            <span class="px-3 py-1 bg-gold text-white rounded-full text-sm">Spring Boot</span>
+                            <span class="px-3 py-1 bg-mint-green text-white rounded-full text-sm">MySQL</span>
+                            <span class="px-3 py-1 bg-light-purple text-white rounded-full text-sm">Redis</span>
+                            <span class="px-3 py-1 bg-coffee-brown text-white rounded-full text-sm">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-mug-hot text-2xl mr-2 text-gold"></i>
+                        <h2 class="text-xl font-bold">Java学习之路</h2>
+                    </div>
+                    <p class="mt-2 text-gray-400">记录学习历程，分享技术心得</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-gitee text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-csdn text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Java学习之路. All rights reserved.</p>
+                <p class="mt-2">京ICP备XXXXXXXX号</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 初始化粒子效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 粒子效果配置
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#007396", "#f89820", "#534636"]
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#007396",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // 夜间模式切换
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+            const body = document.body;
+            
+            // 检查本地存储中的主题设置
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                mobileThemeToggle.innerHTML = '<i class="fas fa-sun mr-2"></i> 日间模式';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-sun mr-2"></i> 日间模式';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-moon mr-2"></i> 夜间模式';
+                }
+            });
+            
+            mobileThemeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-sun mr-2"></i> 日间模式';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    mobileThemeToggle.innerHTML = '<i class="fas fa-moon mr-2"></i> 夜间模式';
+                }
+            });
+            
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 导航栏滚动效果
+            const navBar = document.querySelector('.nav-bar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navBar.classList.add('scrolled');
+                } else {
+                    navBar.classList.remove('scrolled');
+                }
+            });
+            
+            // 回到顶部按钮
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 加载更多按钮动画
+            const loadMoreBtn = document.querySelector('.card:last-child button');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> 加载中...';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-sync-alt mr-2"></i> 已加载全部';
+                        this.disabled = true;
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
